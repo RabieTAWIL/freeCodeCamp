@@ -13,7 +13,12 @@ export const statusRoute: FastifyPluginCallbackTypebox = (
   _options,
   done
 ) => {
-  fastify.get('/status/ping', async (_req, _reply) => {
+  fastify.get('/status/ping', async (req, _reply) => {
+    fastify.log.child({ url: req.url, reqId: req.id }).info('ping');
+    for (let i = 0; i < 1000000000; i++) {
+      // eslint-disable-next-line no-unused-vars
+      const _ = i;
+    }
     return { msg: 'pong' };
   });
 
